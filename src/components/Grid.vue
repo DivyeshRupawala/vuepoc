@@ -2,6 +2,7 @@
 <div class="wrapper"> 
   <form id="search">
     <!-- Search <input name="query" v-model="searchQuery"> -->
+    {{count}}
     <FilterComponent :data="data"></FilterComponent>
   </form>
   <div id="grid-template">
@@ -72,7 +73,10 @@ export default {
         })
       }
     return data;
-    },
+    },   
+    count () {
+      return this.$store.state.count
+    }  
   },
   filters: {
     capitalize: function (str) {

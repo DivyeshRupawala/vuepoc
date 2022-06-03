@@ -23,7 +23,8 @@ export default {
   methods: {    
     onRowSelection: function(selectedRow) {
         console.log("Selected Row");
-        console.log(selectedRow)
+        console.log(selectedRow);
+        this.$emit('rowselected',selectedRow);
     }    
   },
    components: {      

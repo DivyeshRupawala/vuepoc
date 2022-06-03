@@ -1,7 +1,8 @@
 <template>
-<div class="wrapper">
+<div class="wrapper"> 
   <form id="search">
-    Search <input name="query" v-model="searchQuery">
+    <!-- Search <input name="query" v-model="searchQuery"> -->
+    <FilterComponent :data="data"></FilterComponent>
   </form>
   <div id="grid-template">
     <div class="table-header-wrapper">
@@ -17,10 +18,14 @@
     <div class="table-body-wrapper">
       <table class="table-body">
         <tbody>
-            <row :columns="columns" :filteredData="filteredData"></row>
+            <row :columns="columns" :filteredData="filteredData" @rowselected="selectedRowTrigger"></row>
         </tbody>
       </table>
     </div>
+  </div>
+
+  <div id="card-widget">
+    <card-widget :data="selectedRow"></card-widget>
   </div>
 </div>
 </template>
@@ -28,6 +33,8 @@
 <script>
 import Cell from "./Cell.vue";
 import Row from "./Row.vue";
+import FilterComponent from "./FilterComponent.vue";
+import CardWidget from "./CardWidget.vue";
 
 export default {
   name: "grid",
@@ -40,8 +47,9 @@ export default {
       searchQuery: '',
       sortKey: '',
       sortOrders: {},
+      selectedRow: this.data[0]
     }
-  },
+  },  
   computed: {
     filteredData: function () {
       let sortKey = this.sortKey;
@@ -76,6 +84,9 @@ export default {
       this.sortKey = key;
       this.sortOrders[key] = this.sortOrders[key] * -1
     },
+    selectedRowTrigger: function(selectedRowData) {
+      this.selectedRow = selectedRowData;
+    },
   },
   created(){
     let sortOrders = {};
@@ -86,7 +97,9 @@ export default {
   },
   components: {      
     Cell,
-    Row
+    Row,
+    FilterComponent,
+    CardWidget
   },
 }
 </script>
@@ -158,5 +171,8 @@ th.active .arrow {
   flex-direction: column;
   -webkit-flex-direction: column;
   width: 800px;
+  float: left;
+    height: 100%;
+    overflow: scroll;
 }
 </style>

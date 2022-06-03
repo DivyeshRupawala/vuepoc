@@ -227,11 +227,31 @@ export default {
 </script>
 
 <template>
-  <div id="app">              
+  <div id="app">   
+    // Filter
+    // Grid
+    // Card
+   
+
     <grid :data="gridData" :columns="gridColumns"></grid>
   </div>
 </template>
 
 <style>
 @import "./assets/base.css";
+.form-element-container {
+      width: 30%;
+    display: inline-block;
+    border: 1px solid #ccc;
+    padding: 5px;
+    margin: 5px;
+}
+.form-element-container .field{
+  margin-left: 10px;
+}
+.form-element-container .field-label{
+    color: darkgray;
+    width: 40%;
+    float: left;
+}
 </style>

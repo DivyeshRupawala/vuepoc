@@ -1,5 +1,7 @@
 <script>
 import Grid from "./components/Grid.vue";
+import CardWidget from "./components/CardWidget.vue";
+import FilterComponent from "./components/FilterComponent.vue";
 
 export default {
     name: "App",
@@ -221,27 +223,34 @@ export default {
         }
     },
     components: {      
-        Grid
+        Grid,
+        CardWidget,
+        FilterComponent
     },
 };
 </script>
 
 <template>
-  <div id="app">   
-    // Filter
-    // Grid
-    // Card
-   
-
+  <div id="app">     
+    <FilterComponent></FilterComponent>
+    
     <grid :data="gridData" :columns="gridColumns"></grid>
+
+    <div id="card-widget">
+      <card-widget></card-widget>
+    </div>
   </div>
 </template>
 
 <style>
 @import "./assets/base.css";
-.form-element-container {
-      width: 30%;
-    display: inline-block;
+#card-widget {
+  float: left;
+  width: 500px;
+  margin-top: 50px;
+}
+
+.form-element-container {      
     border: 1px solid #ccc;
     padding: 5px;
     margin: 5px;

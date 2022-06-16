@@ -1,14 +1,11 @@
 <script>
+import $bus from '../event'
    export default {
 
-        props: {
-          data: Array,
-          filterKey: String
-        },
-
+        props: {},
         methods: {
           keyHandler (event) {
-             var sortKey = event.key;
+            var sortKey = event.key;
             var enteredKey = event.key;
             var filterKey=this.filterKey +enteredKey;
             filterKey=filterKey.toLowerCase();
@@ -23,12 +20,10 @@
                   );
                 });
               });
-              this.$emit('keyHandler',pivotData);
-
-            }
-            else{
-                var pivotData = this.data;
-                this.$emit('keyHandler',pivotData);
+              $bus.$emit('keyHandler',pivotData);
+            }else {
+              var pivotData = this.data;
+              $bus.$emit('keyHandler',pivotData);
             }
          },
          keyHandlerFull (event) {

@@ -1,10 +1,5 @@
 <template>
-<div class="wrapper"> 
-  <form id="search">
-    <!-- Search <input name="query" v-model="searchQuery"> -->
-    {{count}}
-    <FilterComponent :data="data"></FilterComponent>
-  </form>
+<div class="wrapper">  
   <div id="grid-template">
     <div class="table-header-wrapper">
       <table class="table-header">
@@ -19,15 +14,13 @@
     <div class="table-body-wrapper">
       <table class="table-body">
         <tbody>
-            <row :columns="columns" :filteredData="filteredData" @rowselected="selectedRowTrigger"></row>
+          <tr class="row-wrapper" v-for="entry in filteredData">
+            <row :columns="columns" :entry="entry" @rowselected="selectedRowTrigger"></row>             
+          </tr>
         </tbody>
       </table>
     </div>
-  </div>
-
-  <div id="card-widget">
-    <card-widget :data="selectedRow"></card-widget>
-  </div>
+  </div> 
 </div>
 </template>
 
@@ -36,6 +29,7 @@ import Cell from "./Cell.vue";
 import Row from "./Row.vue";
 import FilterComponent from "./FilterComponent.vue";
 import CardWidget from "./CardWidget.vue";
+import $bus from '../event'
 
 export default {
   name: "grid",
@@ -90,6 +84,7 @@ export default {
     },
     selectedRowTrigger: function(selectedRowData) {
       this.selectedRow = selectedRowData;
+       this.$store.commit('setSelectedRow', selectedRowData);
     },
   },
   created(){
@@ -115,6 +110,10 @@ body{
   color: #555;
 }
 
+.wrapper {
+  width: 45%;
+  float: left;
+}
 table {
   border-spacing: 0;
   width: 100%;

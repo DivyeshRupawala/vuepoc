@@ -25,7 +25,8 @@ export default {
         }
     },
     save: function() {
-         console.log("save " + this.value);
+        console.log("save " + this.value);
+        this.$emit('cellUpdated',this.columnName, this.value);     
         this.editMode = !this.editMode;
     }
   }

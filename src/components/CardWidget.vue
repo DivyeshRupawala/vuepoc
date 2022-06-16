@@ -4,8 +4,10 @@ import FormGenerator from "../components/FormGenerator.vue";
 export default {
   name: "GeneratorDemo",
   components: { FormGenerator },
-  props: {
-    data:Object    
+  computed: {    
+    getSelectedRow() {
+      return this.$store.state.selectRow
+    }  
   },
    methods: {
         showNext: function(e){
@@ -26,14 +28,14 @@ export default {
             "fieldType": "TextInput",
             label: "First Name",
             name: "FIRST_NAME",
-            editable: true
+            editable: false
             },
             {
               fieldType: "TextInput",
               placeholder: "Last Name",
               label: "Last Name",
               name: "LAST_NAME",
-              editable: true
+              editable: false
             },
             {
               fieldType: "TestInput",
@@ -46,7 +48,8 @@ export default {
             fieldType: "NumberInput",
             placeholder: "Phone Number",
             name: "PHONE_NUMBER",
-            label: "Phone Number"
+            label: "Phone Number",
+             editable: true
           },
           {
             fieldType: "TextInput",
@@ -66,8 +69,8 @@ export default {
 };
 </script>
 <template>
-    <div class="form-element-container" :key="counter">
-      <form-generator :schema="schema" :formData="data"></form-generator>
+    <div class="form-element-container" :key="counter"> 
+      <form-generator :schema="schema" :formData="getSelectedRow"></form-generator>
     </div>
   <button v-on:click="showNext('dfd')">Show Next</button>
   

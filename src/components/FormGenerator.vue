@@ -26,8 +26,8 @@ export default {
   },
   methods: {
     updateForm(fieldName, value) {
-      this.$set(this.formData, fieldName, value);
-      this.$emit("input", this.formData);
+      this.formData[fieldName] = value;      
+      this.$store.commit('setSelectedRow', this.formData);      
     }
   }
 };
